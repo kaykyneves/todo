@@ -1,7 +1,6 @@
-import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserService } from './user.service';
-import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { User } from './entities/user.entity';
 import { IsPublic } from 'src/auth/decorators/is-public.decorator';

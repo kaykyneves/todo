@@ -62,14 +62,16 @@ export class TodosService {
   };
 }
 
-  async findOne(id: number, idTodo: number, response: Response) {
+  async findOne(user: User, id: number, response: Response) {
+
+    const convId = Number(id);
     const findTodoById = await this.prisma.todo.findUnique({
       select:{
         Description: true
       },
       where:{
-        authorId: id,
-        id: idTodo
+        authorId: user.id,
+        id: convId
       },
     })
     if(!findTodoById){

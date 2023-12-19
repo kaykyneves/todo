@@ -22,4 +22,8 @@ export class TodosController {
     return this.todosService.findAll(user, response)
   }
 
+  @Get('/FindById/:id')
+  getTodo(@CurrentUser() user: User, @Param('id') id, @Res() response: Response){
+    return this.todosService.findOne(user, id, response)
+  }
 }
