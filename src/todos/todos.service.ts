@@ -41,18 +41,18 @@ export class TodosService {
     }
   }
 
-  async findAll(id: number, response: Response) {
+  async findAll(user: User, response: Response) {
     try{
     const findTodo = await this.prisma.todo.findMany({
       select:{
         Description: true,
       },
       where:{
-        authorId: id,
+        authorId: user.id,
         published: true,
       },
     })
-    if(findTodo.length > 0){
+    if(findTodo.length == 0){
       return response.status(200).json(`You don't have any Todo`);
     }
 

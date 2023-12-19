@@ -1,7 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpCode, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpCode, UseGuards, HttpStatus } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { Response } from 'express';
-import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard';
 import { CreateTodo } from './dto/CreateTodo.dto';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { User } from 'src/user/entities/user.entity';
@@ -16,4 +15,11 @@ export class TodosController {
 
     return this.todosService.create(user, createDto, response);
   }
+
+  @Get('/findAll')
+  @HttpCode(HttpStatus.OK)
+  get(@CurrentUser() user: User, @Res() response: Response){
+    return this.todosService.findAll(user, response)
+  }
+
 }
