@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Response } from 'express';
 import { PrismaService } from 'src/database/prismaService';
 import { CreateTodo } from './dto/CreateTodo.dto';
+import { User } from 'src/user/entities/user.entity';
 
 
 @Injectable()
@@ -9,13 +10,13 @@ export class TodosService {
 
   constructor(private prisma: PrismaService) {}
 
-  async create(createDto: CreateTodo, response: Response) {
+  async create(user: User, createDto: CreateTodo, response: Response) {
     try{
 
       const verifyTodo = await this.prisma.todo.findMany({
         where: {
           Description: createDto.Description,
-          authorId: createDto.authorId,
+          authorId: user.id,
         },
       });
 
@@ -26,13 +27,13 @@ export class TodosService {
       const createTodo = await this.prisma.todo.create({
         data:{
           Description: createDto.Description,
-          published: createDto.published,
-          authorId: createDto.authorId,
+          published: true,
+          authorId: user.id,
         }
       })
 
       if(createTodo){
-        return response.status(200).json(createTodo);
+        return response.status(200).json(createTodo.Description);
       }
         return response.status(401).json('não cadastrado');
     }catch(error){    

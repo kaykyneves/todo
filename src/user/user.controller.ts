@@ -17,8 +17,6 @@ export class UserController {
       return this.userService.create(createUserDto, response);
     }
 
-  @IsPublic()
-    @UseGuards(LocalAuthGuard)
     @Get('/get')
     get(@CurrentUser() user: User){
       return user;
