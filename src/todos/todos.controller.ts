@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpCode, UseGuards, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpCode, HttpStatus } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { Response } from 'express';
 import { CreateTodo } from './dto/CreateTodo.dto';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { User } from 'src/user/entities/user.entity';
+import { UpdateTodo } from './dto/updateTodo.dto';
 
 
 @Controller()
@@ -25,5 +26,10 @@ export class TodosController {
   @Get('/FindById/:id')
   getTodo(@CurrentUser() user: User, @Param('id') id, @Res() response: Response){
     return this.todosService.findOne(user, id, response)
+  }
+
+  @Patch('/updatetodo/:id')
+  UpTodo(@CurrentUser() user: User, @Param('id') id, @Body() updateTodo: UpdateTodo, @Res() response: Response){
+    return this.todosService.update(user, id, updateTodo, response)
   }
 }

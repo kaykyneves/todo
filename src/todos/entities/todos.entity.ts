@@ -1,6 +1,6 @@
 export class Todo {
     readonly id?: number;
-    readonly Description: string;
+    Description: string;
     readonly published: boolean;
     readonly authorId: number;
 }

@@ -3,6 +3,7 @@ import { Response } from 'express';
 import { PrismaService } from 'src/database/prismaService';
 import { CreateTodo } from './dto/CreateTodo.dto';
 import { User } from 'src/user/entities/user.entity';
+import { UpdateTodo } from './dto/updateTodo.dto';
 
 
 @Injectable()
@@ -80,29 +81,46 @@ export class TodosService {
       return response.status(200).jsonp(findTodoById);
 
   }
-  /*
-  async update(id: number, updateTodo: UpdateTodoDto) {
-    console.log('upTodoDto:', updateTodo); // Adicione este log
   
+  async update(user: User, idTodo: number, updateTodo: UpdateTodo, response: Response) {
     try {
-      const upTodo = await this.prisma.todo.update({
+
+      const convertId = Number(idTodo);
+      // Check if the Todo belongs to the user
+      const verify = await this.prisma.todo.findUnique({
         where: {
-          id: id,
-        },
-        data: {
-          Description: updateTodo.Description,
-          published: updateTodo.published,
+          authorId: user.id,
+          id: convertId
         },
       });
   
-      return upTodo;
+      if (verify) {
+        // Update the Todo
+        const todoUpdate = await this.prisma.todo.update({
+          where: {
+            id: convertId,
+          },
+          data: {
+            Description: updateTodo.Description,
+          }
+        });
+  
+        if (todoUpdate) {
+          console.log(todoUpdate);
+          // Return a response to the client if needed
+          response.status(200).json({ message: 'Todo updated successfully' });
+        }
+      } else {
+        // Return a response to the client indicating that the Todo was not found
+        response.status(404).json({ message: 'Todo not found or does not belong to the user' });
+      }
     } catch (error) {
-      console.error(error);
-      throw new Error('Erro ao atualizar o recurso.');
+      // Handle errors during the update
+      console.error('Error during Todo update:', error);
+      // Return a response to the client indicating an internal server error
+      response.status(500).json({ message: 'Internal server error' });
     }
   }
-  */
-  
 
   async remove(id: number) {
     await this.prisma.todo.delete({
