@@ -5,69 +5,136 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+<body>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+  <h1>TODO Aplication (API)</h1>
 
-## Installation
+  <li>In this project, i made a todo API, where the user can sign itself in, and log in, in order to post it's TODO of the day</li>
 
-```bash
-$ npm install
-```
+  <li> I made this project with:</li>
+  <code>
+    🐱 NEST.JS
+    🛕 PRISMA ORM
+    🐘 POSTGRESQL
+    🐳 DOCKER
+    ⚫ JWT
+    🟡 BCRYPT
+    🔴 EXPRESS
+  </code>
 
-## Running the app
+  <H2> CHALLENGE</H2>
+ <h2>Application</h2>
+  <p>The TODO App allows a user to add reminders of things they need to do. Here are the requirements for the app:</p>
 
-```bash
-# development
-$ npm run start
+  <ul>
+    <li>Users can add, delete, and see their todos.</li>
+    <li>All the todos are private; users can't see other users' todos.</li>
+    <li>Users must be logged in to add, delete, or see their todos.</li>
+  </ul>
 
-# watch mode
-$ npm run start:dev
+  <h2>Tasks</h2>
 
-# production mode
-$ npm run start:prod
-```
+ <ol>
+    <li>
+      <strong>✔️ TASK 1:</strong> As a user, I can't add a todo without a description.
+    </li>
+    <li>
+      <strong>✔️ TASK 2:</strong> As a user, I can mark a todo as completed. Write a database migration script in resources/.
+    </li>
+    <li>
+      <strong>✔️ TASK 3:</strong> As a user, I can view a todo in JSON format. Ex: /todo/{id}/json =&gt; {id: 1, user_id: 1,
+      description: "Lorem Ipsum"}
+    </li>
+    <li>
+      <strong>✔️ TASK 5:</strong> As a user, I can see my list of todos.
+    </li>
+    <li>
+      <strong>✔️ TASK 6:</strong> Implement an ORM database access layer so we don’t have SQL in the controller code.
+    </li>
+  </ol>
+</body>
+  <h2>ROUTES</h2>
+  <li>I'm assuming that the user will test the aplicattion using the current port 3000</li>
+  <h3>Sign up User</h3>
+  <ul>
+    <li><strong>Rota:</strong> <a href="http://localhost:3000/users">http://localhost:3000/user</a></li>
+    <li><strong>Method HTTP:</strong> POST</li>
+    <li><strong>JSON example:</strong></li>
+  </ul>
+  <code>
+    {
+      "name": "anymail",
+      "email": "test@gmail.com",
+      "password": "Abc@123"
+    }
+  </code>
+  
+  <h3>Login User</h3>
+  <ul>
+    <li><strong>Rota:</strong> <a href="http://localhost:3000/login">http://localhost:3000/login</a></li>
+    <li><strong>Method HTTP:</strong> POST</li>
+    <li><strong>JSON example:</strong></li>
+  </ul>
+  <code>
+    {
+      "email": "test@gmail.com",
+      "password": "Abc@123"
+    }
+  </code>
 
-## Test
+  <h3>Sign a new TODO</h3>
+  <ul>
+    <li><strong>Rota:</strong> <a href="http://localhost:3000/createtodo">http://localhost:3000/createtodo</a></li>
+    <li><strong>Method HTTP:</strong> POST</li>
+    <li><strong>JSON example:</strong></li>
+  </ul>
+  <code>
+  {
+    "Description": "Buy clothes"
+  }
+  </code>
 
-```bash
-# unit tests
-$ npm run test
+  <li> To sign a TODO, you need to authenticate with the JWT token, which you get when you log in, and pass it in the BEARER TOKEN. If it's valid, the TODO will be signed in.</li>
 
-# e2e tests
-$ npm run test:e2e
+  <h3>List all TODO</h3>
 
-# test coverage
-$ npm run test:cov
-```
+  <ul>
+    <li><strong>Rota:</strong> <a href="http://localhost:3000/findAll">http://localhost:3000/findAll</a></li>
+    <li><strong>Method HTTP:</strong> GET</li>
+    <li><strong>JSON example:</strong></li>
+  </ul>
+  <li> To list all TODO, you need to authenticate with the JWT token, which you get when you log in, and pass it in the BEARER TOKEN. If it's valid, it will list all TODO</li>
 
-## Support
+  <h3>List TODO by ID</h3>
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+  <ul>
+    <li><strong>Rota:</strong> <a href="http://localhost:3000/findbyid/:id">http://localhost:3000/findbyid/:id</a></li>
+    <li><strong>Method HTTP:</strong> GET</li>
+    <li><strong>JSON example:</strong></li>
+  </ul>
+  <li> You need to pass the TODO's id in the header</li>
+  <li> To list the TODO by ID, you need to authenticate with the JWT token, which you get when you log in, and pass it in the BEARER TOKEN. If it's valid, it will proceed</li>
 
-## Stay in touch
+  <h3>Update TODO</h3>
+    <ul>
+      <li><strong>Rota:</strong> <a href="http://localhost:3000/updatetodo/:id">http://localhost:3000/updatetodo/:id</a></li>
+      <li><strong>Method HTTP:</strong> PATCH</li>
+      <li><strong>JSON example:</strong></li>
+    </ul>
+    <code>
+    {
+      "Description": "Buy clothes"
+    }
+    </code>
+  <li> You need to pass the TODO's id in the header</li>
+  <li> To update a TODO, you need to authenticate with the JWT token, which you get when you log in, and pass it in the BEARER TOKEN. If it's valid, it will proceed</li>
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+  <h3>Mark TODO Done</h3>
+  <ul>
+    <li><strong>Rota:</strong> <a href="http://localhost:3000/markDone/:id">http://localhost:3334/markDone/:id</a></li>
+    <li><strong>Method HTTP:</strong> PATCH</li>
+  </ul>
+  <li> You need to pass the TODO's id in the header</li>
+  <li> To mark a TODO done, you need to authenticate with the JWT token, which you get when you log in, and pass it in the BEARER TOKEN. If it's valid, it will proceed</li>
+  
