@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Res, HttpCode, HttpStatus } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { Response } from 'express';
 import { CreateTodo } from './dto/CreateTodo.dto';
