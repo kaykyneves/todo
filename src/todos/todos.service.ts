@@ -30,11 +30,16 @@ export class TodosService {
           Description: createDto.Description,
           published: true,
           authorId: user.id,
-        }
-      })
+        },
+        select:{
+          id: true,
+          Description: true,
+          authorId: true,
+        },
+      });
 
       if(createTodo){
-        return response.status(200).json(createTodo.Description);
+        return response.status(200).json(createTodo)
       }
         return response.status(401).json('não cadastrado');
     }catch(error){    
@@ -46,7 +51,9 @@ export class TodosService {
     try{
     const findTodo = await this.prisma.todo.findMany({
       select:{
+        id: true,
         Description: true,
+        authorId: true,
       },
       where:{
         authorId: user.id,
@@ -68,11 +75,14 @@ export class TodosService {
     const convId = Number(id);
     const findTodoById = await this.prisma.todo.findUnique({
       select:{
-        Description: true
+        id: true,
+        Description: true,
+        authorId: true,
       },
       where:{
         authorId: user.id,
-        id: convId
+        id: convId,
+        published: true,
       },
     })
     if(!findTodoById){
@@ -122,7 +132,7 @@ export class TodosService {
     }
   }
 
-  async remove(user: User, id: number, response: Response) {
+  async markDone(user: User, id: number, response: Response) {
     const convertId = Number(id);
 
     // Check if the Todo belongs to the user
@@ -139,15 +149,16 @@ export class TodosService {
     if (todoIds.includes(convertId)){ 
       try {
         // Delete the Todo
-        await this.prisma.todo.delete({
+        await this.prisma.todo.update({
           where: {
             id: convertId,
           },
+          data:{
+            published: false,
+          }
         });
         // Send success response
-        return response.status(200).json({
-          message: 'Todo deleted successfully.',
-        })
+        return response.status(200).send('')
       } catch (error) {
         // Handle any potential error
         console.error('Error deleting todo:', error);

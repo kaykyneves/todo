@@ -33,9 +33,9 @@ export class TodosController {
     return this.todosService.update(user, id, updateTodo, response)
   }
 
-  @Delete('markDone/:id')
+  @Patch('markDone/:id')
   MarkDone(@CurrentUser() user: User, @Param('id') id, @Res() response: Response){
 
-    return this.todosService.remove(user, id, response)
+    return this.todosService.markDone(user, id, response)
   }
 }
