@@ -32,4 +32,10 @@ export class TodosController {
   UpTodo(@CurrentUser() user: User, @Param('id') id, @Body() updateTodo: UpdateTodo, @Res() response: Response){
     return this.todosService.update(user, id, updateTodo, response)
   }
+
+  @Delete('markDone/:id')
+  MarkDone(@CurrentUser() user: User, @Param('id') id, @Res() response: Response){
+
+    return this.todosService.remove(user, id, response)
+  }
 }

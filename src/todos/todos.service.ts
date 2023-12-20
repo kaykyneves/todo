@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Response } from 'express';
 import { PrismaService } from 'src/database/prismaService';
-import { CreateTodo } from './dto/CreateTodo.dto';
 import { User } from 'src/user/entities/user.entity';
+import { CreateTodo } from './dto/CreateTodo.dto';
 import { UpdateTodo } from './dto/updateTodo.dto';
 
 
@@ -122,11 +122,43 @@ export class TodosService {
     }
   }
 
-  async remove(id: number) {
-    await this.prisma.todo.delete({
+  async remove(user: User, id: number, response: Response) {
+    const convertId = Number(id);
+
+    // Check if the Todo belongs to the user
+    const verify = await this.prisma.todo.findMany({
       where:{
-        id: id,
+        authorId: user.id,
       },
-    })
+      select:{
+        id: true,
+      },
+    });
+    const todoIds = verify.map(todo => todo.id);
+    console.log(todoIds)
+    if (todoIds.includes(convertId)){ 
+      try {
+        // Delete the Todo
+        await this.prisma.todo.delete({
+          where: {
+            id: convertId,
+          },
+        });
+        // Send success response
+        return response.status(200).json({
+          message: 'Todo deleted successfully.',
+        })
+      } catch (error) {
+        // Handle any potential error
+        console.error('Error deleting todo:', error);
+        return response.status(500).json({
+          message: 'Internal server error',
+        });
+      }
+    } else {
+      // Send unauthorized response if the Todo doesn't belong to the user
+      return response.status(401).json('Unauthorized. Todo does not belong to the user.',
+      );
+    }
   }
 }
