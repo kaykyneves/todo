@@ -10,7 +10,7 @@
 
   <h1>TODO Aplication (API)</h1>
 
-  <li>In this project, i made a todo API, where the user can sign itself in, and log in, in order to post it's TODO of the day</li>
+<li>In this project, I made a TODO API where the user can sign up and log in to post their TODO of the day.</li>
 
   <li> I made this project with:</li>
   <code>
@@ -22,8 +22,77 @@
     🟡 BCRYPT
     🔴 EXPRESS
   </code>
+  
+<h2>Getting Started with NestJS</h2>
 
-  <H2> CHALLENGE</H2>
+<p>Before you begin, make sure you have a NestJS project created, and the NestJS CLI is installed on your computer.</p>
+
+
+## Prisma
+
+### Install Prisma
+```bash
+npm install -D prisma
+```
+## Dependencies
+
+- `@prisma/client`
+- `@nestjs/passport`
+- `@nestjs/jwt`
+- `bcrypt`
+- `class-validator`
+- `class-transformer`
+- `passport`
+- `passport-jwt`
+- `passport-local`
+- `node-cron`
+
+Use the following command to install all dependencies:
+
+```bash
+npm i node-cron @prisma/client @nestjs/passport @nestjs/jwt bcrypt class-validator class-transformer passport passport-jwt passport-local
+```
+
+## Dev Dependencies
+
+- `@types/passport-jwt`
+- `@types/passport-local`
+- `@types/bcrypt`
+
+```bash
+npm i -D @types/passport-jwt @types/passport-local @types/bcrypt
+```
+
+## File `.env`
+
+```bash
+
+# Database
+
+DATABASE_URL=""
+
+# Configuration
+
+JWT_SECRET=""
+
+
+```
+
+### Filled `.env` file
+
+```bash
+
+# Database
+
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE"
+
+# Configuration
+
+JWT_SECRET="texto aleatório para proteger sua aplicação"
+
+```
+
+ <H2> CHALLENGE</H2>
  <h2>Application</h2>
   <p>The TODO App allows a user to add reminders of things they need to do. Here are the requirements for the app:</p>
 
