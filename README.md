@@ -13,7 +13,9 @@
 <li>In this project, I made a TODO API where the user can sign up and log in to post their TODO of the day.</li>
 
   <li> I made this project with:</li>
-  <code>
+
+  ```bash
+    
     🐱 NEST.JS
     🛕 PRISMA ORM
     🐘 POSTGRESQL
@@ -21,8 +23,7 @@
     ⚫ JWT
     🟡 BCRYPT
     🔴 EXPRESS
-  </code>
-  
+  ```
 <h2>Getting Started with NestJS</h2>
 
 <p>Before you begin, make sure you have a NestJS project created, and the NestJS CLI is installed on your computer.</p>
@@ -131,13 +132,14 @@ JWT_SECRET="texto aleatório para proteger sua aplicação"
     <li><strong>Method HTTP:</strong> POST</li>
     <li><strong>JSON example:</strong></li>
   </ul>
-  <code>
+  
+  ```bash 
     {
       "name": "anymail",
       "email": "test@gmail.com",
       "password": "Abc@123"
     }
-  </code>
+  ```
   
   <h3>Login User</h3>
   <ul>
@@ -145,12 +147,13 @@ JWT_SECRET="texto aleatório para proteger sua aplicação"
     <li><strong>Method HTTP:</strong> POST</li>
     <li><strong>JSON example:</strong></li>
   </ul>
-  <code>
+
+  ```bash 
     {
       "email": "test@gmail.com",
       "password": "Abc@123"
     }
-  </code>
+  ```
 
   <h3>Sign a new TODO</h3>
   <ul>
@@ -158,13 +161,13 @@ JWT_SECRET="texto aleatório para proteger sua aplicação"
     <li><strong>Method HTTP:</strong> POST</li>
     <li><strong>JSON example:</strong></li>
   </ul>
-  <code>
-  {
-    "Description": "Buy clothes"
-  }
-  </code>
 
-  <li> To sign a TODO, you need to authenticate with the JWT token, which you get when you log in, and pass it in the BEARER TOKEN. If it's valid, the TODO will be signed in.</li>
+  ```bash 
+    {
+    "Description": "Buy clothes"
+    }
+  ```
+<li> To sign a TODO, you need to authenticate with the JWT token, which you get when you log in, and pass it in the BEARER TOKEN. If it's valid, the TODO will be signed in.</li>
 
   <h3>List all TODO</h3>
 
@@ -191,17 +194,19 @@ JWT_SECRET="texto aleatório para proteger sua aplicação"
       <li><strong>Method HTTP:</strong> PATCH</li>
       <li><strong>JSON example:</strong></li>
     </ul>
-    <code>
-    {
+    
+   ```bash 
+      {
       "Description": "Buy clothes"
-    }
-    </code>
+      }
+   ```
+
   <li> You need to pass the TODO's id in the header</li>
   <li> To update a TODO, you need to authenticate with the JWT token, which you get when you log in, and pass it in the BEARER TOKEN. If it's valid, it will proceed</li>
 
   <h3>Mark TODO Done</h3>
   <ul>
-    <li><strong>Rota:</strong> <a href="http://localhost:3000/markDone/:id">http://localhost:3334/markDone/:id</a></li>
+    <li><strong>Rota:</strong> <a href="http://localhost:3000/markDone/:id">http://localhost:3000/markDone/:id</a></li>
     <li><strong>Method HTTP:</strong> PATCH</li>
   </ul>
   <li> You need to pass the TODO's id in the header</li>
